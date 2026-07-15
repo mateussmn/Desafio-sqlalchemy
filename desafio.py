@@ -8,7 +8,7 @@ class Fornecedores(Base):
     __tablename__ = "fornecedores"
     id = Column(Integer, primary_key=True)
     nome = Column(String(50), nullable=True)
-    telefone = Column(Integer(20))
+    telefone = Column(String(20))
     email = Column(String(50))
     endereco = Column(String(100))
 
@@ -22,3 +22,9 @@ class Produtos(Base):
     
     # Estabelece a relação entre Produto e Fornecedor
     fornecedor = relationship("Fornecedor")
+
+engine = create_engine('sqlite:///desafio.db', echo=True)
+Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind=engine)
+session = Session()
