@@ -3,3 +3,22 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 
 Base = declarative_base()
+
+class Fornecedores(Base):
+    __tablename__ = "fornecedores"
+    id = Column(Integer, primary_key=True)
+    nome = Column(String(50), nullable=True)
+    telefone = Column(Integer(20))
+    email = Column(String(50))
+    endereco = Column(String(100))
+
+class Produtos(Base):
+    __tablename__ = "produtos"
+    id = Column(Integer, primary_key=True)
+    nome = Column(String(50), nullable=True)
+    descricao = Column(String(200))
+    preco = Column(Integer)
+    fornecedor_id = Column(Integer, ForeignKey('fornecedores.id'))
+    
+    # Estabelece a relação entre Produto e Fornecedor
+    fornecedor = relationship("Fornecedor")
